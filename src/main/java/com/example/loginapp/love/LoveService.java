@@ -1,10 +1,10 @@
 package com.example.loginapp.love;
 
+import com.example.loginapp._core.ex.ExceptionApi403;
+import com.example.loginapp._core.ex.ExceptionApi404;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.example.loginapp._core.ex.ExceptionApi403;
-import com.example.loginapp._core.ex.ExceptionApi404;
 
 @RequiredArgsConstructor
 @Service
@@ -37,4 +37,5 @@ public class LoveService {
         Long loveCount = loveRepository.findByBoardId(id);
         return new LoveResponse.DeleteDTO(loveCount.intValue());
     }
+
 }

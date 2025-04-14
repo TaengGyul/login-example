@@ -1,7 +1,7 @@
 package com.example.loginapp.board;
 
-import lombok.Data;
 import com.example.loginapp.reply.Reply;
+import lombok.Data;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -63,4 +63,5 @@ public class BoardResponse {
             this.replies = repliesDTO;
         }
     }
+
 }

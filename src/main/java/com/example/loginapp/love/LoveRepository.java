@@ -12,13 +12,13 @@ public class LoveRepository {
 
     public Long findByBoardId(int boardId) {
         Query query = em.createQuery("select count(lo) from Love lo where lo.board.id = :boardId");
-        query.setParameter("boardId", 5);
+        query.setParameter("boardId", boardId);
 
         Long count = (Long) query.getSingleResult();
         return count;
     }
 
-    public Love findByUserIdAndBoardId(int userId, int boardId) {
+    public Love findByUserIdAndBoardId(Integer userId, Integer boardId) {
         Query query = em.createQuery("select lo from Love lo where lo.user.id = :userId and lo.board.id = :boardId", Love.class);
         query.setParameter("userId", userId);
         query.setParameter("boardId", boardId);

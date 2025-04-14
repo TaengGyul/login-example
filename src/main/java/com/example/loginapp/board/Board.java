@@ -1,12 +1,12 @@
 package com.example.loginapp.board;
 
+import com.example.loginapp.reply.Reply;
+import com.example.loginapp.user.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import com.example.loginapp.reply.Reply;
-import com.example.loginapp.user.User;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -49,4 +49,3 @@ public class Board {
         this.isPublic = isPublic == null ? false : true;
     }
 }
-
