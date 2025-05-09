@@ -1,11 +1,11 @@
 package com.example.loginapp.reply;
 
+import com.example.loginapp._core.ex.ExceptionApi403;
+import com.example.loginapp._core.ex.ExceptionApi404;
+import com.example.loginapp.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.example.loginapp._core.ex.Exception403;
-import com.example.loginapp._core.ex.Exception404;
-import com.example.loginapp.user.User;
 
 @RequiredArgsConstructor
 @Service
@@ -22,10 +22,10 @@ public class ReplyService {
         Reply replyPS = replyRepository.findById(id);
 
         // Exception404
-        if (replyPS == null) throw new Exception404("존재하지 않는 리소스입니다.");
+        if (replyPS == null) throw new ExceptionApi404("존재하지 않는 리소스입니다.");
 
         if (!replyPS.getUser().getId().equals(sessionUserId)) {
-            throw new Exception403("권한이 없습니다.");
+            throw new ExceptionApi403("권한이 없습니다.");
         }
 
         int boardId = replyPS.getBoard().getId();

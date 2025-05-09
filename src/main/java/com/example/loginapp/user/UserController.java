@@ -1,5 +1,7 @@
 package com.example.loginapp.user;
 
+import com.example.loginapp._core.ex.ExceptionApi401;
+import com.example.loginapp._core.util.Resp;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -9,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.example.loginapp._core.ex.Exception401;
-import com.example.loginapp._core.util.Resp;
 
 import java.util.Map;
 
@@ -24,7 +24,7 @@ public class UserController {
     @GetMapping("/user/update-form")
     public String updateForm() {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) throw new Exception401("인증이 필요합니다");
+        if (sessionUser == null) throw new ExceptionApi401("인증이 필요합니다");
 
         return "user/update-form";
     }
@@ -32,7 +32,7 @@ public class UserController {
     @PostMapping("/user/update")
     public String update(UserRequest.UpdateDTO updateDTO) {
         User sessionUser = (User) session.getAttribute("sessionUser");
-        if (sessionUser == null) throw new Exception401("인증이 필요합니다");
+        if (sessionUser == null) throw new ExceptionApi401("인증이 필요합니다");
 
         // update user_tb set password = ?, email = ? where id = ?
         User user = userService.회원정보수정(updateDTO, sessionUser.getId());

@@ -1,7 +1,7 @@
 package com.example.loginapp.board;
 
-import com.example.loginapp._core.ex.Exception403;
-import com.example.loginapp._core.ex.Exception404;
+import com.example.loginapp._core.ex.ExceptionApi403;
+import com.example.loginapp._core.ex.ExceptionApi404;
 import com.example.loginapp.love.Love;
 import com.example.loginapp.love.LoveRepository;
 import com.example.loginapp.reply.ReplyRepository;
@@ -24,9 +24,9 @@ public class BoardService {
     public void 글수정하기(BoardRequest.UpdateDTO reqDTO, Integer boardId, Integer sessionUserId) {
         Board boardPS = boardRepository.findById(boardId);
 
-        if (boardPS == null) throw new Exception404("자원을 찾을 수 없습니다.");
+        if (boardPS == null) throw new ExceptionApi404("자원을 찾을 수 없습니다.");
 
-        if (!boardPS.getUser().equals(sessionUserId)) throw new Exception403("권한이 없습니다.");
+        if (!boardPS.getUser().equals(sessionUserId)) throw new ExceptionApi403("권한이 없습니다.");
 
         boardPS.update(reqDTO.getTitle(), reqDTO.getContent(), reqDTO.getIsPublic());
     } // 더티 체킹 (상태변경해서 update)
@@ -67,10 +67,10 @@ public class BoardService {
 
     public Board 업데이트글보기(int id, Integer sessionUserId) {
         Board boardPS = boardRepository.findById(id);
-        if (boardPS == null) throw new Exception404("자원을 찾을 수 없습니다.");
+        if (boardPS == null) throw new ExceptionApi404("자원을 찾을 수 없습니다.");
 
         if (!boardPS.getUser().getId().equals(sessionUserId)) {
-            throw new Exception403("권한이 없습니다.");
+            throw new ExceptionApi403("권한이 없습니다.");
         }
         return boardPS;
     }
